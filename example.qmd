@@ -1,0 +1,7 @@
+---
+title: "Assignment 2: Collaborative and Reproducible Practices"
+subtitle: Git, Github and command line interface
+author: Duc Hoang
+format: html
+---
+
