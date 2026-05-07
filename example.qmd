@@ -5,3 +5,49 @@ author: Duc Hoang
 format: html
 ---
 
+## 1. Set up the repository locally on my computer
+
+Suppose you have an existing local directory that is not yet under version control, and you want to start tracking it. For this project, I created a new directory named **Assignment 2**.
+
+First, I opened *RStudio* and created a new project in this existing directory. This generated an `Assignment 2.Rproj` file, fulfilling the requirement to set up an R Project. 
+
+For the remainder of the workflow, I transitioned to the **Positron** IDE. Upon opening the` Assignment 2` directory in Positron, the only existing file was the `.Rproj` file. I then created a new Quarto document, saved it as `example.qmd`, and rendered the file to generate the corresponding HTML output, which name is `example.html`
+
+## 2. Initialize a local Git Repository and push to GitHub
+
+Normally, in order to set up one project that is reproducible, we tend to follow these following steps:
+
+- Create a GitHub repo
+- Clone the repo locally
+- Move all the files and folders from your existing project into this folder
+- Stage, commit, push
+
+However, in order to follow a smoother workflow and reduce any duplication when cloning the file to local platform, it is better to operate Git locally first, and then push to remote repository.
+
+Github even explain on how to setup this repo using these git commands: 
+
+### Step 1: git init
+
+
+```bash
+PS C:\Users\ducho\OneDrive\MBA S1 Y1\ETC5513 - Collaboration\Assignment 2> git pull origin main
+remote: Enumerating objects: 7, done.
+remote: Counting objects: 100% (7/7), done.
+remote: Compressing objects: 100% (6/6), done.
+remote: Total 6 (delta 2), reused 0 (delta 0), pack-reused 0 (from 0)
+Unpacking objects: 100% (6/6), 2.59 KiB | 51.00 KiB/s, done.
+From github.com:dhoa0015-svg/Assignment2_DucHoang_36558966
+ * branch            main       -> FETCH_HEAD
+   ce8fbb4..43049d3  main       -> origin/main
+Updating ce8fbb4..43049d3
+Fast-forward
+ LICENSE   | 21 +++++++++++++++++++++
+ README.md |  2 ++
+ 2 files changed, 23 insertions(+)
+ create mode 100644 LICENSE
+ create mode 100644 README.md
+
+PS C:\Users\ducho\OneDrive\MBA S1 Y1\ETC5513 - Collaboration\Assignment 2> git status
+On branch main
+Your branch is up to date with 'origin/main'.
+```

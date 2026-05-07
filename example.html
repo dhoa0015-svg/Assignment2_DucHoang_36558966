@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Duc Hoang">
 
-<title>Untitled</title>
+<title>Assignment 2: Collaborative and Reproducible Practices</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -22,6 +23,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -49,13 +85,20 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Untitled</h1>
+<h1 class="title">Assignment 2: Collaborative and Reproducible Practices</h1>
+<p class="subtitle lead">Git, Github and command line interface</p>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Duc Hoang </p>
+          </div>
+  </div>
     
   
     
@@ -66,7 +109,47 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-
+<section id="set-up-the-repository-locally-on-my-computer" class="level2">
+<h2 class="anchored" data-anchor-id="set-up-the-repository-locally-on-my-computer">1. Set up the repository locally on my computer</h2>
+<p>Suppose you have an existing local directory that is not yet under version control, and you want to start tracking it. For this project, I created a new directory named <strong>Assignment 2</strong>.</p>
+<p>First, I opened <em>RStudio</em> and created a new project in this existing directory. This generated an <code>Assignment 2.Rproj</code> file, fulfilling the requirement to set up an R Project.</p>
+<p>For the remainder of the workflow, I transitioned to the <strong>Positron</strong> IDE. Upon opening the<code>Assignment 2</code> directory in Positron, the only existing file was the <code>.Rproj</code> file. I then created a new Quarto document, saved it as <code>example.qmd</code>, and rendered the file to generate the corresponding HTML output, which name is <code>example.html</code></p>
+</section>
+<section id="initialize-a-local-git-repository-and-push-to-github" class="level2">
+<h2 class="anchored" data-anchor-id="initialize-a-local-git-repository-and-push-to-github">2. Initialize a local Git Repository and push to GitHub</h2>
+<p>Normally, in order to set up one project that is reproducible, we tend to follow these following steps:</p>
+<ul>
+<li>Create a GitHub repo</li>
+<li>Clone the repo locally</li>
+<li>Move all the files and folders from your existing project into this folder</li>
+<li>Stage, commit, push</li>
+</ul>
+<p>However, in order to follow a smoother workflow and reduce any duplication when cloning the file to local platform, it is better to operate Git locally first, and then push to remote repository.</p>
+<p>Github even explain on how to setup this repo using these git commands:</p>
+<section id="step-1-git-init" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-git-init">Step 1: git init</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">PS</span> C:<span class="dt">\U</span>sers<span class="dt">\d</span>ucho<span class="dt">\O</span>neDrive<span class="dt">\M</span>BA S1 Y1<span class="dt">\E</span>TC5513 <span class="at">-</span> Collaboration<span class="dt">\A</span>ssignment <span class="dv">2</span><span class="op">&gt;</span> git pull origin main</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">remote:</span> Enumerating objects: 7, done.</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">remote:</span> Counting objects: 100% <span class="er">(</span><span class="ex">7/7</span><span class="kw">)</span><span class="ex">,</span> done.</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">remote:</span> Compressing objects: 100% <span class="er">(</span><span class="ex">6/6</span><span class="kw">)</span><span class="ex">,</span> done.</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">remote:</span> Total 6 <span class="er">(</span><span class="ex">delta</span> 2<span class="kw">)</span><span class="ex">,</span> reused 0 <span class="er">(</span><span class="ex">delta</span> 0<span class="kw">)</span><span class="ex">,</span> pack-reused 0 <span class="er">(</span><span class="ex">from</span> 0<span class="kw">)</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ex">Unpacking</span> objects: 100% <span class="er">(</span><span class="ex">6/6</span><span class="kw">)</span><span class="ex">,</span> 2.59 KiB <span class="kw">|</span> <span class="ex">51.00</span> KiB/s, done.</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ex">From</span> github.com:dhoa0015-svg/Assignment2_DucHoang_36558966</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a> <span class="ex">*</span> branch            main       <span class="at">-</span><span class="op">&gt;</span> FETCH_HEAD</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>   <span class="ex">ce8fbb4..43049d3</span>  main       <span class="at">-</span><span class="op">&gt;</span> origin/main</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="ex">Updating</span> ce8fbb4..43049d3</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="ex">Fast-forward</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a> <span class="ex">LICENSE</span>   <span class="kw">|</span> <span class="ex">21</span> +++++++++++++++++++++</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a> <span class="ex">README.md</span> <span class="kw">|</span>  <span class="ex">2</span> ++</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a> <span class="ex">2</span> files changed, 23 insertions<span class="er">(</span><span class="ex">+</span><span class="kw">)</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a> <span class="ex">create</span> mode 100644 LICENSE</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a> <span class="ex">create</span> mode 100644 README.md</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="ex">PS</span> C:<span class="dt">\U</span>sers<span class="dt">\d</span>ucho<span class="dt">\O</span>neDrive<span class="dt">\M</span>BA S1 Y1<span class="dt">\E</span>TC5513 <span class="at">-</span> Collaboration<span class="dt">\A</span>ssignment <span class="dv">2</span><span class="op">&gt;</span> git status</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="ex">On</span> branch main</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="ex">Your</span> branch is up to date with <span class="st">'origin/main'</span>.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
 
 </main>
 <!-- /main column -->
