@@ -32,28 +32,98 @@ Normally, in order to set up one project that is reproducible, we tend to follow
 However, to ensure a streamlined version control workflow and avoid redundant directory structures, it is often more efficient to initialize a Git repository locally before pushing it to a remote platform like GitHub. Because cloning a remote repository downloads an entirely new directory onto your local machine, doing so can sometimes lead to awkwardly nested project folders. By initializing Git in your local workspace first, you can seamlessly integrate version control into your existing project structure before syncing it with the remote server.
 
 Github even explain on how to setup this repo using these git commands: 
+```{r}
+#| fig-cap: "Github instruction for initialising Git repository from local to remote"
+#| out-width: "80%"
+#| fig-align: "center"
+#| echo: false
 
-### Step 1: git init
+knitr::include_graphics("image/Github_instruction.png")
+```
+
+::: {.callout-warning title="Always making sure you are in the correct directory"}
+
+Whenever you open your terminal, the very first thing you need to establish is your current location. You can do this by typing `pwd`, which stands for `print working directory`. This outputs your exact path in the computer Make sure you are in the right folder for your project.
+
+If you want to look around and see what folders are available to you, type `ls` to list the contents of that directory and how they organize in your computer.  
+
+Once you are oriented, use the `cd` (change directory) command to navigate step-by-step into your specific project folder.
+:::
+
+### Step 1: Command `git init`
+
+First step to do to make our local file become a tracked git repository is to use `git init`
+
+> **Syntax:** `git init`
+
+This command will transform the current, standard directory into an empty Git repository so you can start saving versions of your files. It creates a hidden directory inside the project folder name `.git`
+
+::: {.callout-tip title="When to use"}
+Use this when you are starting a brand new project and want to start tracking its files, or when you want to add version control to an existing un-tracked folder.
+:::
+
+### Step 2: Commnand `git add`
+
+Now that your repository is initialized, the next step is to tell Git which files you want it to track. In our case, this includes your `.Rproj` file, your Quarto (.qmd) scripts, the generated .html reports, and any associated configuration files.
+
+> **Syntax:** `git add .`
+
+It takes your modified or newly created files and moves them into the staging area. Think of this like you are packing your files and getting them ready for the commit, but they haven't been committed yet.
 
 ```bash
-PS C:\Users\ducho\OneDrive\MBA S1 Y1\ETC5513 - Collaboration\Assignment 2> git pull origin main
-remote: Enumerating objects: 7, done.
-remote: Counting objects: 100% (7/7), done.
-remote: Compressing objects: 100% (6/6), done.
-remote: Total 6 (delta 2), reused 0 (delta 0), pack-reused 0 (from 0)
-Unpacking objects: 100% (6/6), 2.59 KiB | 51.00 KiB/s, done.
-From github.com:dhoa0015-svg/Assignment2_DucHoang_36558966
- * branch            main       -> FETCH_HEAD
-   ce8fbb4..43049d3  main       -> origin/main
-Updating ce8fbb4..43049d3
-Fast-forward
- LICENSE   | 21 +++++++++++++++++++++
- README.md |  2 ++
- 2 files changed, 23 insertions(+)
- create mode 100644 LICENSE
- create mode 100644 README.md
+$ git add <your_file_name>
+# To see the result, you run `git status`:
 
-PS C:\Users\ducho\OneDrive\MBA S1 Y1\ETC5513 - Collaboration\Assignment 2> git status
-On branch main
-Your branch is up to date with 'origin/main'.
+$ git status
+# Changes to be committed:
+#   (use "git rm --cached <file>..." to unstage)
+#         new file:   analysis.qmd
 ```
+### Step 3: Command `git commit`
+
+Once your files are in the staging area, you need to permanently record these changes in your repository's history. This creates a snapshot of your project exactly as it looks right now.
+
+> **Syntax:** `git commit -m "your_commit_message"`
+
+```bash
+$ git commit -m "Initial first commit in local repository"
+```
+
+::: {.callout-tip title="Best practices for commits"}
+
+Always use the `-m` flag to write your message directly in the terminal. If you forget it, Git will open a text editor - Vim editor.
+
+Keep your commit messages short but descriptive, always be specific and consider subjects of files you are commiting.
+:::
+
+### Step 4: Command `git branch`
+Historically, git named the default branch master. To this day, the standard across the tech industry and GitHub is to name the primary branch main. We need to make sure our core branch name match this standard.
+
+> **Syntax:** `git branch -M main`
+
+This command forces Git to rename your current active branch to main.
+
+```bash
+$ git branch -M main
+# If you want to check it worked, type:
+$ git branch
+# * main
+```
+
+### Step 5: Command `git remote`
+
+Right now, your repository only exists locally on your computer. To back it up and share it, you need to connect your local repository to the empty repository you created on GitHub. This command tells local Git to add a remote connection to this local repository.
+
+> **Syntax:** `git remote add origin "your_git_ssh_key"`
+
+### Step 6: Command `git push`
+
+The final step is to actually upload your committed files from your computer to your GitHub repository.
+
+> **Syntax:** `git push -u origin main`
+
+This command pushes your code up the `origin` connection we just established, specifically onto the `main` branch.
+
+::: {.callout-tip title="`-u` flag"}
+The `-u` flag stands for `upstream`. You only need to type this the very first time you push a new branch. It links your local main branch to the GitHub main branch. For future updates, you can simply type git push and Git will remember where to send it.
+:::

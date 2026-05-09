@@ -127,28 +127,128 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p>However, to ensure a streamlined version control workflow and avoid redundant directory structures, it is often more efficient to initialize a Git repository locally before pushing it to a remote platform like GitHub. Because cloning a remote repository downloads an entirely new directory onto your local machine, doing so can sometimes lead to awkwardly nested project folders. By initializing Git in your local workspace first, you can seamlessly integrate version control into your existing project structure before syncing it with the remote server.</p>
 <p>Github even explain on how to setup this repo using these git commands:</p>
-<section id="step-1-git-init" class="level3">
-<h3 class="anchored" data-anchor-id="step-1-git-init">Step 1: git init</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">PS</span> C:<span class="dt">\U</span>sers<span class="dt">\d</span>ucho<span class="dt">\O</span>neDrive<span class="dt">\M</span>BA S1 Y1<span class="dt">\E</span>TC5513 <span class="at">-</span> Collaboration<span class="dt">\A</span>ssignment <span class="dv">2</span><span class="op">&gt;</span> git pull origin main</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">remote:</span> Enumerating objects: 7, done.</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">remote:</span> Counting objects: 100% <span class="er">(</span><span class="ex">7/7</span><span class="kw">)</span><span class="ex">,</span> done.</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">remote:</span> Compressing objects: 100% <span class="er">(</span><span class="ex">6/6</span><span class="kw">)</span><span class="ex">,</span> done.</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">remote:</span> Total 6 <span class="er">(</span><span class="ex">delta</span> 2<span class="kw">)</span><span class="ex">,</span> reused 0 <span class="er">(</span><span class="ex">delta</span> 0<span class="kw">)</span><span class="ex">,</span> pack-reused 0 <span class="er">(</span><span class="ex">from</span> 0<span class="kw">)</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ex">Unpacking</span> objects: 100% <span class="er">(</span><span class="ex">6/6</span><span class="kw">)</span><span class="ex">,</span> 2.59 KiB <span class="kw">|</span> <span class="ex">51.00</span> KiB/s, done.</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ex">From</span> github.com:dhoa0015-svg/Assignment2_DucHoang_36558966</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a> <span class="ex">*</span> branch            main       <span class="at">-</span><span class="op">&gt;</span> FETCH_HEAD</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>   <span class="ex">ce8fbb4..43049d3</span>  main       <span class="at">-</span><span class="op">&gt;</span> origin/main</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="ex">Updating</span> ce8fbb4..43049d3</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="ex">Fast-forward</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a> <span class="ex">LICENSE</span>   <span class="kw">|</span> <span class="ex">21</span> +++++++++++++++++++++</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a> <span class="ex">README.md</span> <span class="kw">|</span>  <span class="ex">2</span> ++</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a> <span class="ex">2</span> files changed, 23 insertions<span class="er">(</span><span class="ex">+</span><span class="kw">)</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a> <span class="ex">create</span> mode 100644 LICENSE</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a> <span class="ex">create</span> mode 100644 README.md</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="ex">PS</span> C:<span class="dt">\U</span>sers<span class="dt">\d</span>ucho<span class="dt">\O</span>neDrive<span class="dt">\M</span>BA S1 Y1<span class="dt">\E</span>TC5513 <span class="at">-</span> Collaboration<span class="dt">\A</span>ssignment <span class="dv">2</span><span class="op">&gt;</span> git status</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="ex">On</span> branch main</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="ex">Your</span> branch is up to date with <span class="st">'origin/main'</span>.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="image/Github_instruction.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>Github instruction for initialising Git repository from local to remote</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled" title="Always making sure you are in the correct directory">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Always making sure you are in the correct directory
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Whenever you open your terminal, the very first thing you need to establish is your current location. You can do this by typing <code>pwd</code>, which stands for <code>print working directory</code>. This outputs your exact path in the computer Make sure you are in the right folder for your project.</p>
+<p>If you want to look around and see what folders are available to you, type <code>ls</code> to list the contents of that directory and how they organize in your computer.</p>
+<p>Once you are oriented, use the <code>cd</code> (change directory) command to navigate step-by-step into your specific project folder.</p>
+</div>
+</div>
+<section id="step-1-command-git-init" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-command-git-init">Step 1: Command <code>git init</code></h3>
+<p>First step to do to make our local file become a tracked git repository is to use <code>git init</code></p>
+<blockquote class="blockquote">
+<p><strong>Syntax:</strong> <code>git init</code></p>
+</blockquote>
+<p>This command will transform the current, standard directory into an empty Git repository so you can start saving versions of your files. It creates a hidden directory inside the project folder name <code>.git</code></p>
+<div class="callout callout-style-default callout-tip callout-titled" title="When to use">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>When to use
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Use this when you are starting a brand new project and want to start tracking its files, or when you want to add version control to an existing un-tracked folder.</p>
+</div>
+</div>
+</section>
+<section id="step-2-commnand-git-add" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-commnand-git-add">Step 2: Commnand <code>git add</code></h3>
+<p>Now that your repository is initialized, the next step is to tell Git which files you want it to track. In our case, this includes your <code>.Rproj</code> file, your Quarto (.qmd) scripts, the generated .html reports, and any associated configuration files.</p>
+<blockquote class="blockquote">
+<p><strong>Syntax:</strong> <code>git add .</code></p>
+</blockquote>
+<p>It takes your modified or newly created files and moves them into the staging area. Think of this like you are packing your files and getting them ready for the commit, but they haven’t been committed yet.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git add <span class="op">&lt;</span>your_file_name<span class="op">&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># To see the result, you run `git status`:</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git status</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Changes to be committed:</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   (use "git rm --cached &lt;file&gt;..." to unstage)</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">#         new file:   analysis.qmd</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="step-3-command-git-commit" class="level3">
+<h3 class="anchored" data-anchor-id="step-3-command-git-commit">Step 3: Command <code>git commit</code></h3>
+<p>Once your files are in the staging area, you need to permanently record these changes in your repository’s history. This creates a snapshot of your project exactly as it looks right now.</p>
+<blockquote class="blockquote">
+<p><strong>Syntax:</strong> <code>git commit -m "your_commit_message"</code></p>
+</blockquote>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git commit <span class="at">-m</span> <span class="st">"Initial first commit in local repository"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Best practices for commits">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Best practices for commits
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Always use the <code>-m</code> flag to write your message directly in the terminal. If you forget it, Git will open a text editor - Vim editor.</p>
+<p>Keep your commit messages short but descriptive, always be specific and consider subjects of files you are commiting.</p>
+</div>
+</div>
+</section>
+<section id="step-4-command-git-branch" class="level3">
+<h3 class="anchored" data-anchor-id="step-4-command-git-branch">Step 4: Command <code>git branch</code></h3>
+<p>Historically, git named the default branch master. To this day, the standard across the tech industry and GitHub is to name the primary branch main. We need to make sure our core branch name match this standard.</p>
+<blockquote class="blockquote">
+<p><strong>Syntax:</strong> <code>git branch -M main</code></p>
+</blockquote>
+<p>This command forces Git to rename your current active branch to main.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git branch <span class="at">-M</span> main</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># If you want to check it worked, type:</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git branch</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># * main</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="step-5-command-git-remote" class="level3">
+<h3 class="anchored" data-anchor-id="step-5-command-git-remote">Step 5: Command <code>git remote</code></h3>
+<p>Right now, your repository only exists locally on your computer. To back it up and share it, you need to connect your local repository to the empty repository you created on GitHub. This command tells local Git to add a remote connection to this local repository.</p>
+<blockquote class="blockquote">
+<p><strong>Syntax:</strong> <code>git remote add origin "your_git_ssh_key"</code></p>
+</blockquote>
+</section>
+<section id="step-6-command-git-push" class="level3">
+<h3 class="anchored" data-anchor-id="step-6-command-git-push">Step 6: Command <code>git push</code></h3>
+<p>The final step is to actually upload your committed files from your computer to your GitHub repository.</p>
+<blockquote class="blockquote">
+<p><strong>Syntax:</strong> <code>git push -u origin main</code></p>
+</blockquote>
+<p>This command pushes your code up the <code>origin</code> connection we just established, specifically onto the <code>main</code> branch.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="`-u` flag">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span><code>-u</code> flag
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The <code>-u</code> flag stands for <code>upstream</code>. You only need to type this the very first time you push a new branch. It links your local main branch to the GitHub main branch. For future updates, you can simply type git push and Git will remember where to send it.</p>
+</div>
+</div>
 </section>
 </section>
 
