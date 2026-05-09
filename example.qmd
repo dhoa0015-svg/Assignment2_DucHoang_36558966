@@ -2,7 +2,14 @@
 title: "Assignment 2: Collaborative and Reproducible Practices"
 subtitle: Git, Github and command line interface
 author: Duc Hoang
-format: html
+format:
+  unilur-html: default
+  unilur-html+solution:
+    output-file: example-solution.html
+  unilur-pdf: default
+  unilur-pdf+solution: default
+execute: 
+  show_solution: true
 ---
 
 ## 1. Set up the repository locally on my computer
@@ -22,12 +29,11 @@ Normally, in order to set up one project that is reproducible, we tend to follow
 - Move all the files and folders from your existing project into this folder
 - Stage, commit, push
 
-However, in order to follow a smoother workflow and reduce any duplication when cloning the file to local platform, it is better to operate Git locally first, and then push to remote repository.
+However, to ensure a streamlined version control workflow and avoid redundant directory structures, it is often more efficient to initialize a Git repository locally before pushing it to a remote platform like GitHub. Because cloning a remote repository downloads an entirely new directory onto your local machine, doing so can sometimes lead to awkwardly nested project folders. By initializing Git in your local workspace first, you can seamlessly integrate version control into your existing project structure before syncing it with the remote server.
 
 Github even explain on how to setup this repo using these git commands: 
 
 ### Step 1: git init
-
 
 ```bash
 PS C:\Users\ducho\OneDrive\MBA S1 Y1\ETC5513 - Collaboration\Assignment 2> git pull origin main

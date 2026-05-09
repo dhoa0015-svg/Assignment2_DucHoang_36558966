@@ -77,10 +77,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="fullcontent quarto-light">
+<body class="quarto-light">
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="example.pdf"><i class="bi bi-file-pdf"></i>PDF (unilur)</a></li><li><a href="example+solution.pdf"><i class="bi bi-file-pdf"></i>PDF (unilur)</a></li></ul></div></div>
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -124,7 +125,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Move all the files and folders from your existing project into this folder</li>
 <li>Stage, commit, push</li>
 </ul>
-<p>However, in order to follow a smoother workflow and reduce any duplication when cloning the file to local platform, it is better to operate Git locally first, and then push to remote repository.</p>
+<p>However, to ensure a streamlined version control workflow and avoid redundant directory structures, it is often more efficient to initialize a Git repository locally before pushing it to a remote platform like GitHub. Because cloning a remote repository downloads an entirely new directory onto your local machine, doing so can sometimes lead to awkwardly nested project folders. By initializing Git in your local workspace first, you can seamlessly integrate version control into your existing project structure before syncing it with the remote server.</p>
 <p>Github even explain on how to setup this repo using these git commands:</p>
 <section id="step-1-git-init" class="level3">
 <h3 class="anchored" data-anchor-id="step-1-git-init">Step 1: git init</h3>
