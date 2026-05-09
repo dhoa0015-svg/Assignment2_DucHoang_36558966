@@ -251,6 +251,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
+<section id="modify-on-both-branch-and-main" class="level2">
+<h2 class="anchored" data-anchor-id="modify-on-both-branch-and-main">3. Modify on both branch and main</h2>
+<p>To work on new features safely without affecting your main project, you should create a new branch. A branch is essentially an alternate timeline or an isolated workspace for your code.</p>
+<blockquote class="blockquote">
+<p><strong>Syntax:</strong> <code>git switch -c "newbranch_name"</code></p>
+</blockquote>
+<p>This command actually does two things at once: it creates the new branch, and it immediately switches you into it, or in another word, it moves the repository <code>HEAD</code> to this branch as well.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Check if it works">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Check if it works
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You can confirm this command actually worked by type <code>git branch</code> in the terminal. This command shows a list of branches and point to which branch are you in currently</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git switch <span class="at">-c</span> testbranch</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Switched to a new branch 'testbranch'</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git branch</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#  format</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#  main</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#* testbranch</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<p>There are other ways to create branches and navigate between branches as well. For example, one more command that does exactly what the previous one did is <code>git checkout -b "branch_name"</code>. Additionally, you can do it step-by-step by first, create a new branch, and then swith to that branch to make changes on that newly created branch.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git branch <span class="st">"branch_name"</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git switch <span class="st">"branch_name"</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Switched to branch 'branch_name'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Once you have modified your file inside the <code>testbranch</code>, it is time to permanently record your progress. To ensure your updates are saved both locally on your computer and remotely on GitHub, you must complete the standard stage &gt; commit &gt; push workflow.</p>
+<p>Think of this as packing your new changes into the staging area, officially labeling the commit, and shipping it up to your remote repository.</p>
+<p>Execute the following commands to complete this process: `git add</p>
+</section>
 
 </main>
 <!-- /main column -->
