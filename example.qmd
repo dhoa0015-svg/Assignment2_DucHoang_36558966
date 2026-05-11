@@ -417,3 +417,26 @@ c97bbcc Modify on main branch, add Mege branch and resolve merge conflicts secti
 d18c366 Create new testbranch and add instruction for these steps
 ```
 Each line shows the shortened commit hash followed by the commit message, giving a clear timeline of all changes made to the project. This is useful for quickly reviewing what has been done, identifying a specific commit to revert to, or confirming that your merge and tag commits appear as expected.
+
+## 7. **Undo commit**
+
+### Adding a plot to `example.qmd`
+
+Here is a simple plot using `mtcars` dataset created by R code. Afterwards, the plot is staged and saved as a new commit.
+
+```{r}
+#| echo: false
+
+library(ggplot2)
+
+ggplot(mtcars, aes(x = wt, y = mpg)) +
+  geom_point() +
+  labs(title = "Weight vs. Fuel Efficiency",
+       x = "Weight (1000 lbs)", 
+       y = "Miles Per Gallon")
+```
+
+```bash
+$ git add example.qmd
+$ git commit -m "Add plot section to example.qmd"
+```
