@@ -546,6 +546,42 @@ Modification on testbranch: Section 3: Modify on new branch
 <p>Each line shows the shortened commit hash followed by the commit message, giving a clear timeline of all changes made to the project. This is useful for quickly reviewing what has been done, identifying a specific commit to revert to, or confirming that your merge and tag commits appear as expected.</p>
 </section>
 </section>
+<section id="undo-commit" class="level2">
+<h2 class="anchored" data-anchor-id="undo-commit">7. <strong>Undo commit</strong></h2>
+<section id="adding-a-plot-to-example.qmd" class="level3">
+<h3 class="anchored" data-anchor-id="adding-a-plot-to-example.qmd">Adding a plot to <code>example.qmd</code></h3>
+<p>Here is a simple plot using <code>mtcars</code> dataset created by R code. Afterwards, the plot is staged and saved as a new commit.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="example_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git add example.qmd</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git commit <span class="at">-m</span> <span class="st">"Add plot section to example.qmd"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="git-revert" class="level3">
+<h3 class="anchored" data-anchor-id="git-revert"><code>git revert</code></h3>
+<p><code>git revert</code> creates a <strong>brand new commit</strong> that applies the exact opposite of the changes in the commit you want to undo. The original commit remains in the log, nothing is rewritten. This makes <code>git revert</code> the safer choice when the commit has <strong>already been pushed to a remote</strong>, since it does not alter existing history and will not cause conflicts for other collaborators.</p>
+<p>First, confirm the commit you want to undo using <code>git log --oneline</code>. Afterwards, you can then revert that commit by referencing its hash. Afterwards, you use git revert command and you can choose to keep the default message or edit it, then save and close the editor to complete the revert. Alternatively, to skip the editor entirely and use the default message automatically:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git revert 8a3f0b8</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Output:</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[main</span> 11f7ccc] Revert <span class="st">"Add plot section to example.qmd"</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a> <span class="ex">3</span> files changed, 1 insertion<span class="er">(</span><span class="ex">+</span><span class="kw">)</span><span class="ex">,</span> 49 deletions<span class="er">(</span><span class="ex">-</span><span class="kw">)</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a> <span class="ex">delete</span> mode 100644 example_files/figure-html/unnamed-chunk-3-1.png</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Running <code>git log --oneline</code> afterwards shows the revert recorded as its own commit:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git log <span class="at">--oneline</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="ex">11f7ccc</span> <span class="er">(</span><span class="ex">HEAD</span> <span class="at">-</span><span class="op">&gt;</span> main<span class="kw">)</span> <span class="ex">Revert</span> <span class="st">"Add plot section to example.qmd"</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="ex">8a3f0b8</span> Add plot section to example.qmd</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="ex">5940aa9</span> <span class="er">(</span><span class="ex">origin/main</span><span class="kw">)</span> <span class="ex">Add</span> and complete section 6: delete branch and review commit history</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The changes from the plot commit are now undone, and the file is back to its previous state, but both commits remain visible in the history.</p>
+</section>
+</section>
 
 </main>
 <!-- /main column -->

@@ -417,3 +417,53 @@ c97bbcc Modify on main branch, add Mege branch and resolve merge conflicts secti
 d18c366 Create new testbranch and add instruction for these steps
 ```
 Each line shows the shortened commit hash followed by the commit message, giving a clear timeline of all changes made to the project. This is useful for quickly reviewing what has been done, identifying a specific commit to revert to, or confirming that your merge and tag commits appear as expected.
+
+## 7. **Undo commit**
+
+### Adding a plot to `example.qmd`
+
+Here is a simple plot using `mtcars` dataset created by R code. Afterwards, the plot is staged and saved as a new commit.
+
+```{r}
+#| echo: false
+
+library(ggplot2)
+
+ggplot(mtcars, aes(x = wt, y = mpg)) +
+  geom_point() +
+  labs(title = "Weight vs. Fuel Efficiency",
+       x = "Weight (1000 lbs)", 
+       y = "Miles Per Gallon")
+```
+
+```bash
+$ git add example.qmd
+$ git commit -m "Add plot section to example.qmd"
+```
+
+### `git revert`
+
+`git revert` creates a **brand new commit** that applies the exact opposite of the changes in the commit you want to undo. The original commit remains in the log, nothing is rewritten. This makes `git revert` the safer choice when the commit has **already been pushed to a remote**, since it does not alter existing history and will not cause conflicts for other collaborators.
+
+First, confirm the commit you want to undo using `git log --oneline`. Afterwards, you can then revert that commit by referencing its hash. Afterwards, you use git revert command and you can choose to keep the default message or edit it, then save and close the editor to complete the revert. Alternatively, to skip the editor entirely and use the default message automatically:
+
+
+```bash
+$ git revert 8a3f0b8
+
+# Output:
+[main 11f7ccc] Revert "Add plot section to example.qmd"
+ 3 files changed, 1 insertion(+), 49 deletions(-)
+ delete mode 100644 example_files/figure-html/unnamed-chunk-3-1.png
+```
+
+Running `git log --oneline` afterwards shows the revert recorded as its own commit:
+```bash
+$ git log --oneline
+
+11f7ccc (HEAD -> main) Revert "Add plot section to example.qmd"
+8a3f0b8 Add plot section to example.qmd
+5940aa9 (origin/main) Add and complete section 6: delete branch and review commit history
+```
+
+The changes from the plot commit are now undone, and the file is back to its previous state, but both commits remain visible in the history. 
