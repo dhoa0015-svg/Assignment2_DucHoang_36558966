@@ -167,20 +167,22 @@ $ git add example.html
 $ git commit -m "Create new testbranch and add instruction for these steps"
 
 $ git push -u origin testbranch
-# Enumerating objects: 13, done.
-# Counting objects: 100% (13/13), done.
-# Delta compression using up to 8 threads
-# Compressing objects: 100% (9/9), done.
-# Writing objects: 100% (9/9), 5.33 KiB | 1.78 MiB/s, done.
-# Total 9 (delta 6), reused 0 (delta 0), pack-reused 0 (from 0)
-# remote: Resolving deltas: 100% (6/6), completed with 2 local objects.
-# remote: 
-# remote: Create a pull request for 'testbranch' on GitHub by visiting:
-# remote:      https://github.com/dhoa0015-svg/Assignment2_DucHoang_36558966/pull/new/testbranch
-# remote:
-# To github.com:dhoa0015-svg/Assignment2_DucHoang_36558966.git
-#  * [new branch]      testbranch -> testbranch
-# branch 'testbranch' set up to track 'origin/testbranch'.
+
+# Output
+Enumerating objects: 13, done.
+Counting objects: 100% (13/13), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (9/9), done.
+Writing objects: 100% (9/9), 5.33 KiB | 1.78 MiB/s, done.
+Total 9 (delta 6), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (6/6), completed with 2 local objects.
+remote: 
+remote: Create a pull request for 'testbranch' on GitHub by visiting:
+remote:      https://github.com/dhoa0015-svg/Assignment2_DucHoang_36558966/pull/new/testbranch
+remote:
+To github.com:dhoa0015-svg/Assignment2_DucHoang_36558966.git
+ * [new branch]      testbranch -> testbranch
+branch 'testbranch' set up to track 'origin/testbranch'.
 ```
 
 ### Create new folder and use `--amend`
@@ -270,6 +272,7 @@ Because both branches edited the same lines, Git cannot auto-merge them. It will
 
 ```bash
 $ git merge testbranch
+
 # Output:
 Auto-merging example.html
 CONFLICT (content): Merge conflict in example.html
@@ -362,4 +365,55 @@ Date:   Mon May 11 17:43:22 2026 +1000
     Merge testbranch into main, resolve conflicts by move Section 4 to after Section 3
 ```
 
-## 6. **Delete branch and review commit history.
+## 6. **Delete branch and review commit history.**
+### Delete `testbranch`
+When working with Git, branches are a powerful tool for keeping work organised and isolated. However, once a branch has served its purpose, as the changes have been reviewed, merged into `main`, and everything looks good, it is best practice to delete it. Keeping stale branches around can clutter the repository and make it harder to track what work is still actively in progress versus what has already been completed. Deleting a branch does **not** delete the commits or the history; those are preserved on `main` through the merge.
+
+Since `testbranch` has been fully merged into `main`, it is no longer needed. We delete it in two places: locally and on the remote to keep the repository tidy.
+
+* **Delete the local branch:**
+
+> **Syntax**: `git branch -d <branch_name>`
+
+```bash
+$ git branch -d testbranch
+
+# Output:
+Deleted branch testbranch (was 1f5cc78).
+```
+
+* **Delete the remote branch:**
+
+> **Syntax:** `git push origin --delete <branch_name>`
+
+```bash
+$ git push origin --delete testbranch
+
+# Output:
+To github.com:dhoa0015-svg/Assignment2_DucHoang_36558966.git
+ - [deleted]         testbranch
+```
+You can confirm it is gone by visiting your repository on GitHub where it should no longer appear under the "Branches" tab.
+
+
+### View the condensed commit log
+To get a compact overview of the project's commit history, it is useful to view the log in a condensed format. 
+
+By default, `git log` displays a full block of information for each commit: the full hash, author, date, and message 
+The `--oneline` flag narrow this down to one line per commit, showing only the shortened hash and the commit message. This makes it much easier to scan through the history, identify a specific commit, or confirm that your recent actions such as merges, amendments, and tags have all been recorded correctly.
+
+> **Syntax:** `git log --oneline`
+```bash
+git log --oneline
+
+# Output:
+c5c03d0 (HEAD -> main) Add and complete section 5: Create tag for commit
+7424ede Complete section 4
+dac1329 (tag: v1.0, origin/main) Merge testbranch into main, resolve conflicts by move Section 4 to after Section 3
+41c6793 Add merge documents to the 4 section
+c97bbcc Modify on main branch, add Mege branch and resolve merge conflicts section, following the section3 on testbranch.
+1f5cc78 Add more details and format on section header, make small changes to "amend" text section
+7d2b85c Refine small detail in testbranch
+d18c366 Create new testbranch and add instruction for these steps
+```
+Each line shows the shortened commit hash followed by the commit message, giving a clear timeline of all changes made to the project. This is useful for quickly reviewing what has been done, identifying a specific commit to revert to, or confirming that your merge and tag commits appear as expected.
