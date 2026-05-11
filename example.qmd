@@ -441,7 +441,7 @@ $ git add example.qmd
 $ git commit -m "Add plot section to example.qmd"
 ```
 
-### `git revert`
+### **`git revert`**
 
 `git revert` creates a **brand new commit** that applies the exact opposite of the changes in the commit you want to undo. The original commit remains in the log, nothing is rewritten. This makes `git revert` the safer choice when the commit has **already been pushed to a remote**, since it does not alter existing history and will not cause conflicts for other collaborators.
 
@@ -467,3 +467,39 @@ $ git log --oneline
 ```
 
 The changes from the plot commit are now undone, and the file is back to its previous state, but both commits remain visible in the history. 
+
+### **`git reset`**
+
+Now suppose you want to undo a commit but you do **not** want to lose the changes you just made to the file — this is where `git reset --soft` comes in. `git reset` is a command that moves the current branch pointer backwards to a previous commit. The `--soft` flag controls how Git handles your working files and staging area after the reset. With `--soft`, Git undoes the commit but leaves all of your changes exactly as they were, staged and ready to be recommitted once you are happy with them. This is particularly useful when you have committed too early, written the wrong commit message, or simply want to rework your changes before making them part of the permanent history.
+
+::: {.callout-warning title="when to use `git revert` vs `git reset --soft"}
+It is important to note that `git reset` rewrites the local commit history. This means it should **only be used on commits that have not yet been pushed to a remote repository**. If the commit has already been pushed, `git revert` is the safer alternative, as it undoes changes by creating a new commit rather than erasing history.
+:::
+
+
+```bash
+$ git reset --soft HEAD~1
+```
+
+::: {.callout-tip title="Flags information"}
+- `--soft` undoes the commit but **keeps your changes staged and intact** in the working directory.
+- `HEAD~1` means "go back one commit from where HEAD currently is."
+:::
+
+There are three reset flags available in `git reset`, the key difference between them is what happens to your files after the commit is removed from history:
+
+- `--soft` is the most conservative option. It undoes the commit but keeps all your changes staged in the index, exactly as they were before you ran the command. You can immediately recommit without needing to `git add` anything again.
+
+- `--mixed` is the default behaviour when no flag is specified. It undoes the commit and unstages your changes, but still keeps them in your working directory. You will need to run `git add` again before you can recommit, giving you a chance to review and re-select what goes into the next commit.
+
+- `--hard` is the most agressive one as it undoes the commit and permanently discards all changes in both the staging area and the working directory. The files are restored to exactly how they were at the previous commit, with no way to recover the lost changes. **This flag should be used with caution.**
+
+As a general rule, prefer `--soft` when you want to redo a commit, `--mixed` when you want to re-examine what you are staging, and avoid `--hard` unless you are completely certain you no longer need those changes.
+
+| Flag | Undoes commit | Keeps changes in working directory | Keeps changes staged |
+|------|:---:|:---:|:---:|
+| `--soft` | ✅ | ✅ | ✅ |
+| `--mixed` *(default)* | ✅ | ✅ | ❌ |
+| `--hard` | ✅ | ❌ | ❌ |
+
+

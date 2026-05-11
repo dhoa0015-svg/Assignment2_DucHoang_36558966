@@ -564,7 +564,7 @@ Modification on testbranch: Section 3: Modify on new branch
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git commit <span class="at">-m</span> <span class="st">"Add plot section to example.qmd"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="git-revert" class="level3">
-<h3 class="anchored" data-anchor-id="git-revert"><code>git revert</code></h3>
+<h3 class="anchored" data-anchor-id="git-revert"><strong><code>git revert</code></strong></h3>
 <p><code>git revert</code> creates a <strong>brand new commit</strong> that applies the exact opposite of the changes in the commit you want to undo. The original commit remains in the log, nothing is rewritten. This makes <code>git revert</code> the safer choice when the commit has <strong>already been pushed to a remote</strong>, since it does not alter existing history and will not cause conflicts for other collaborators.</p>
 <p>First, confirm the commit you want to undo using <code>git log --oneline</code>. Afterwards, you can then revert that commit by referencing its hash. Afterwards, you use git revert command and you can choose to keep the default message or edit it, then save and close the editor to complete the revert. Alternatively, to skip the editor entirely and use the default message automatically:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git revert 8a3f0b8</span>
@@ -580,6 +580,83 @@ Modification on testbranch: Section 3: Modify on new branch
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="ex">8a3f0b8</span> Add plot section to example.qmd</span>
 <span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="ex">5940aa9</span> <span class="er">(</span><span class="ex">origin/main</span><span class="kw">)</span> <span class="ex">Add</span> and complete section 6: delete branch and review commit history</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>The changes from the plot commit are now undone, and the file is back to its previous state, but both commits remain visible in the history.</p>
+</section>
+<section id="git-reset" class="level3">
+<h3 class="anchored" data-anchor-id="git-reset"><strong><code>git reset</code></strong></h3>
+<p>Now suppose you want to undo a commit but you do <strong>not</strong> want to lose the changes you just made to the file — this is where <code>git reset --soft</code> comes in. <code>git reset</code> is a command that moves the current branch pointer backwards to a previous commit. The <code>--soft</code> flag controls how Git handles your working files and staging area after the reset. With <code>--soft</code>, Git undoes the commit but leaves all of your changes exactly as they were, staged and ready to be recommitted once you are happy with them. This is particularly useful when you have committed too early, written the wrong commit message, or simply want to rework your changes before making them part of the permanent history.</p>
+<div class="callout callout-style-default callout-warning callout-titled" title="when to use `git revert` vs `git reset --soft">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>when to use <code>git revert</code> vs `git reset –soft
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>It is important to note that <code>git reset</code> rewrites the local commit history. This means it should <strong>only be used on commits that have not yet been pushed to a remote repository</strong>. If the commit has already been pushed, <code>git revert</code> is the safer alternative, as it undoes changes by creating a new commit rather than erasing history.</p>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git reset <span class="at">--soft</span> HEAD~1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Flags information">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Flags information
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><code>--soft</code> undoes the commit but <strong>keeps your changes staged and intact</strong> in the working directory.</li>
+<li><code>HEAD~1</code> means “go back one commit from where HEAD currently is.”</li>
+</ul>
+</div>
+</div>
+<p>There are three reset flags available in <code>git reset</code>, the key difference between them is what happens to your files after the commit is removed from history:</p>
+<ul>
+<li><p><code>--soft</code> is the most conservative option. It undoes the commit but keeps all your changes staged in the index, exactly as they were before you ran the command. You can immediately recommit without needing to <code>git add</code> anything again.</p></li>
+<li><p><code>--mixed</code> is the default behaviour when no flag is specified. It undoes the commit and unstages your changes, but still keeps them in your working directory. You will need to run <code>git add</code> again before you can recommit, giving you a chance to review and re-select what goes into the next commit.</p></li>
+<li><p><code>--hard</code> is the most agressive one as it undoes the commit and permanently discards all changes in both the staging area and the working directory. The files are restored to exactly how they were at the previous commit, with no way to recover the lost changes. <strong>This flag should be used with caution.</strong></p></li>
+</ul>
+<p>As a general rule, prefer <code>--soft</code> when you want to redo a commit, <code>--mixed</code> when you want to re-examine what you are staging, and avoid <code>--hard</code> unless you are completely certain you no longer need those changes.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 28%">
+<col style="width: 23%">
+<col style="width: 23%">
+<col style="width: 23%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Flag</th>
+<th style="text-align: center;">Undoes commit</th>
+<th style="text-align: center;">Keeps changes in working directory</th>
+<th style="text-align: center;">Keeps changes staged</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>--soft</code></td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">✅</td>
+</tr>
+<tr class="even">
+<td><code>--mixed</code> <em>(default)</em></td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">❌</td>
+</tr>
+<tr class="odd">
+<td><code>--hard</code></td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">❌</td>
+<td style="text-align: center;">❌</td>
+</tr>
+</tbody>
+</table>
 </section>
 </section>
 
