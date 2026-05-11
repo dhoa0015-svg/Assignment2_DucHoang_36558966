@@ -127,3 +127,39 @@ This command pushes your code up the `origin` connection we just established, sp
 ::: {.callout-tip title="`-u` flag"}
 The `-u` flag stands for `upstream`. You only need to type this the very first time you push a new branch. It links your local main branch to the GitHub main branch. For future updates, you can simply type git push and Git will remember where to send it.
 :::
+
+## 4. **Merge branch and resolve merge conflicts**
+
+When it comes to merging branches into the main branch, this is one of Git's most powerful features as it allows users to work on different versions of a project simultaneously. Once we are satisfied with the changes on a branch, we can merge it back into `main` to incorporate those changes into the primary codebase.
+
+::: {.callout-warning title="Always check which branch you are working on"}
+Because Git allows you to switch between branches, it is important to always be aware of which branch you are currently on before making any changes. Working on the wrong branch by mistake can lead to messy, unintended modifications that are difficult to untangle.
+
+If you are using Positron, you can always check your current branch in the **bottom-left corner** of the editor window.
+```{r}
+#| fig-cap: "Positron branch navigator"
+#| out-width: "80%"
+#| fig-align: "center"
+#| echo: false
+
+knitr::include_graphics("image/branch.png")
+```
+:::
+
+First, switch back to the `main` branch. This is necessary so that our next changes are recorded on `main` and not on `testbranch`.
+```bash
+$ git checkout main
+```
+Open `example.qmd` and edit the same lines that were changed on testbranch, but write something different. The key is that both branches have touched the same part of the file, what will trigger a conflict.
+
+After saving, stage and commit the change:
+```bash
+$ git add example.qmd
+$ git commit -m "Update title on main branch"
+```
+
+Then push to the remote so the `main` branch on GitHub also reflects this change:
+```bash
+git push origin main
+```
+At this point, both `main` and `testbranch` have diverged, where they share a common ancestor commit but each has a different version of example.qmd. Git knows about this but has not yet tried to reconcile the two.

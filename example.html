@@ -251,6 +251,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
+<section id="merge-branch-and-resolve-merge-conflicts" class="level2">
+<h2 class="anchored" data-anchor-id="merge-branch-and-resolve-merge-conflicts">4. <strong>Merge branch and resolve merge conflicts</strong></h2>
+<p>When it comes to merging branches into the main branch, this is one of Git’s most powerful features as it allows users to work on different versions of a project simultaneously. Once we are satisfied with the changes on a branch, we can merge it back into <code>main</code> to incorporate those changes into the primary codebase.</p>
+<div class="callout callout-style-default callout-warning callout-titled" title="Always check which branch you are working on">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Always check which branch you are working on
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Because Git allows you to switch between branches, it is important to always be aware of which branch you are currently on before making any changes. Working on the wrong branch by mistake can lead to messy, unintended modifications that are difficult to untangle.</p>
+<p>If you are using Positron, you can always check your current branch in the <strong>bottom-left corner</strong> of the editor window.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="image/branch.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>Positron branch navigator</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>First, switch back to the <code>main</code> branch. This is necessary so that our next changes are recorded on <code>main</code> and not on <code>testbranch</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git checkout main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Open <code>example.qmd</code> and edit the same lines that were changed on testbranch, but write something different. The key is that both branches have touched the same part of the file, what will trigger a conflict.</p>
+<p>After saving, stage and commit the change:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git add example.qmd</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git commit <span class="at">-m</span> <span class="st">"Update title on main branch"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Then push to the remote so the <code>main</code> branch on GitHub also reflects this change:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>At this point, both <code>main</code> and <code>testbranch</code> have diverged, where they share a common ancestor commit but each has a different version of example.qmd. Git knows about this but has not yet tried to reconcile the two.</p>
+</section>
 
 </main>
 <!-- /main column -->
