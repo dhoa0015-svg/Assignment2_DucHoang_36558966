@@ -414,7 +414,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="ex">Automatic</span> merge failed<span class="kw">;</span> <span class="ex">fix</span> conflicts and then commit the result.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <section id="what-the-conflict-markers-look-like" class="level4">
 <h4 class="anchored" data-anchor-id="what-the-conflict-markers-look-like">What the conflict markers look like</h4>
-<p>when the conflict ahppen, <code>example.qmd</code> file will display in any text editor. Git has annotated the conflicting section with special markers:</p>
+<p>When a merge conflict occurs, Git pauses the merge and modifies the affected file directly to show you exactly where the problem is. Git has annotated the conflicting section with special markers:</p>
 <pre><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
 Modification on main branch: Section 4. Merge branch and resolve merge conflict
 =======
@@ -427,10 +427,9 @@ Modification on testbranch: Section 3: Modify on new branch
 </section>
 <section id="resolving-the-conflict" class="level4">
 <h4 class="anchored" data-anchor-id="resolving-the-conflict">Resolving the conflict</h4>
-<p>Edit the file to keep the version you want, this act can enable you too: accept changes with just click, or manual change evrythign if you want. (or write a new combined version), and <strong>delete all three marker lines</strong>. after you are happy with your changes, Save the file. Now tell Git the conflict has been resolved by staging the file:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add example.qmd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>To resolve the conflict, edit the file to keep your preferred version, whether by clicking your editor’s shortcuts to accept specific changes, typing out a new combined version, or manually editing the text, and ensure you <strong>delete all three marker lines</strong>. Once you are happy with the final result, save the file and tell Git the conflict has been resolved by staging it.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git add example.qmd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Running <code>git status</code> again confirms there are no more unmerged paths:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="verifying-on-github" class="level4">
 <h4 class="anchored" data-anchor-id="verifying-on-github">Verifying on GitHub</h4>
@@ -444,6 +443,58 @@ Modification on testbranch: Section 3: Modify on new branch
 <p>Merge conflicts are a normal part of collaborative version control. Understanding how to read conflict markers, choose the correct resolution, and complete the merge cleanly is an essential Git skill. The workflow here — <code>merge → identify conflict → edit file → add → commit → push</code> is the same regardless of how large or complex the conflict is.</p>
 </section>
 </section>
+</section>
+<section id="create-annotated-tag" class="level2">
+<h2 class="anchored" data-anchor-id="create-annotated-tag">5. <strong>Create annotated tag</strong></h2>
+<p>We can mark any commit with a tag. This is done to create a named, permanent reference point in the project’s history. This is most commonly used to indicate a specific release or milestone (e.g.&nbsp;<code>v1.0</code>, <code>v2.0-beta</code>). Unlike branch names which move forward with every new commit, a tag always points to the exact same commit it was created on.</p>
+<p>There are two types of tags in Git:</p>
+<ul>
+<li><strong>Lightweight tags</strong> — a simple pointer to a commit, with no extra information.</li>
+<li><strong>Annotated tags</strong> — store additional metadata such as the tagger’s name, date, and a message. These are preferred for releases as they provide more context.</li>
+</ul>
+<p>To tag the merge commit on <code>main</code> as version <code>v1.0</code>:</p>
+<blockquote class="blockquote">
+<p><strong>Syntax:</strong> <code>git tag -a v1.0 &lt;commit_hash&gt; -m &lt;message&gt;</code></p>
+</blockquote>
+<p>To fetch the commit hash, it is always best to use <code>git log --oneline</code> command, this asks Git to show us a list of past commits with their hashes on the side. Navigate to the merge <code>testbranch</code> to <code>main</code>, fetch out it hash and use it for the tag command.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git tag <span class="at">-a</span> v1.0 e3f1a2b <span class="at">-m</span> <span class="st">"Release version 1.0"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Flags information">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Flags information
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><code>-a v1.0</code> creates an annotated tag named v1.0.</li>
+<li><code>-m "Release version 1.0"</code> attaches a message to the tag.</li>
+</ul>
+</div>
+</div>
+<p>Tags are not pushed to the remote automatically with git push. You need to push the tag explicitly:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git push origin v1.0</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>You can verify the tag exists and inspect its details with:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git show v1.0</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Output:</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="ex">tag</span> v1.0</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="ex">Tagger:</span> Duc Hoang <span class="op">&lt;</span>dhoa0015@student.monash.edu<span class="op">&gt;</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="ex">Date:</span>   Mon May 11 21:11:57 2026 +1000</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="ex">Release</span> version 1.0</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="ex">commit</span> dac132969380cd09bbee5fde9e172d9553d0cd0e <span class="er">(</span><span class="ex">tag:</span> v1.0, origin/main<span class="kw">)</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="ex">Merge:</span> 41c6793 1f5cc78</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="ex">Author:</span> Duc Hoang <span class="op">&lt;</span>dhoa0015@student.monash.edu<span class="op">&gt;</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="ex">Date:</span>   Mon May 11 17:43:22 2026 +1000</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>    <span class="ex">Merge</span> testbranch into main, resolve conflicts by move Section 4 to after Section 3</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="delete-branch-and-review-commit-history." class="level2">
+<h2 class="anchored" data-anchor-id="delete-branch-and-review-commit-history.">6. **Delete branch and review commit history.</h2>
 </section>
 
 </main>

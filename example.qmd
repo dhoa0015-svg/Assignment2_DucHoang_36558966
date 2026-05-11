@@ -280,7 +280,7 @@ Automatic merge failed; fix conflicts and then commit the result.
 
 #### What the conflict markers look like
 
-when the conflict ahppen, `example.qmd` file will display in any text editor. Git has annotated the conflicting section with special markers:
+When a merge conflict occurs, Git pauses the merge and modifies the affected file directly to show you exactly where the problem is. Git has annotated the conflicting section with special markers:
 
 ```
 <<<<<<< HEAD
@@ -295,17 +295,13 @@ Modification on testbranch: Section 3: Modify on new branch
 
 #### Resolving the conflict
 
-Edit the file to keep the version you want, this act can enable you too: accept changes with just click, or manual change evrythign if you want. (or write a new combined version), and **delete all three marker lines**. after you are happy with your changes, Save the file. Now tell Git the conflict has been resolved by staging the file:
+To resolve the conflict, edit the file to keep your preferred version, whether by clicking your editor's shortcuts to accept specific changes, typing out a new combined version, or manually editing the text, and ensure you **delete all three marker lines**. Once you are happy with the final result, save the file and tell Git the conflict has been resolved by staging it.
 
 ```bash
-git add example.qmd
+$ git add example.qmd
 ```
 
 Running `git status` again confirms there are no more unmerged paths:
-
-```bash
-git status
-```
 
 #### Verifying on GitHub
 
@@ -318,3 +314,52 @@ Navigate to your repository on GitHub. You will see:
 This confirms that the conflict was identified, resolved locally, and the clean merged result has been successfully published to the remote repository.
 
 Merge conflicts are a normal part of collaborative version control. Understanding how to read conflict markers, choose the correct resolution, and complete the merge cleanly is an essential Git skill. The workflow here — `merge → identify conflict → edit file → add → commit → push` is the same regardless of how large or complex the conflict is.
+
+## 5. **Create annotated tag**
+
+We can mark any commit with a tag. This is done to create a named, permanent reference point in the project's history. This is most commonly used to indicate a specific release or milestone (e.g. `v1.0`, `v2.0-beta`). Unlike branch names which move forward with every new commit, a tag always points to the exact same commit it was created on.
+
+There are two types of tags in Git:
+
+- **Lightweight tags** — a simple pointer to a commit, with no extra information.
+- **Annotated tags** — store additional metadata such as the tagger's name, date, and a message. These are preferred for releases as they provide more context.
+
+To tag the merge commit on `main` as version `v1.0`:
+
+> **Syntax:** `git tag -a v1.0 <commit_hash> -m <message>`
+
+To fetch the commit hash, it is always best to use `git log --oneline` command, this asks Git to show us a list of past commits with their hashes on the side. Navigate to the merge `testbranch` to `main`, fetch out it hash and use it for the tag command.
+
+```bash
+$ git tag -a v1.0 e3f1a2b -m "Release version 1.0"
+```
+::: {.callout-tip title="Flags information"}
+- `-a v1.0` creates an annotated tag named v1.0.
+- `-m "Release version 1.0"` attaches a message to the tag.
+:::
+
+Tags are not pushed to the remote automatically with git push. You need to push the tag explicitly:
+```bash
+$ git push origin v1.0
+```
+
+You can verify the tag exists and inspect its details with:
+```bash
+$ git show v1.0
+
+# Output:
+tag v1.0
+Tagger: Duc Hoang <dhoa0015@student.monash.edu>
+Date:   Mon May 11 21:11:57 2026 +1000
+
+Release version 1.0
+
+commit dac132969380cd09bbee5fde9e172d9553d0cd0e (tag: v1.0, origin/main)
+Merge: 41c6793 1f5cc78
+Author: Duc Hoang <dhoa0015@student.monash.edu>
+Date:   Mon May 11 17:43:22 2026 +1000
+
+    Merge testbranch into main, resolve conflicts by move Section 4 to after Section 3
+```
+
+## 6. **Delete branch and review commit history.
