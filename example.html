@@ -111,13 +111,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <section id="set-up-the-repository-locally-on-my-computer" class="level2">
-<h2 class="anchored" data-anchor-id="set-up-the-repository-locally-on-my-computer">1. Set up the repository locally on my computer</h2>
+<h2 class="anchored" data-anchor-id="set-up-the-repository-locally-on-my-computer"><strong>1. Set up the repository locally on my computer</strong></h2>
 <p>Suppose you have an existing local directory that is not yet under version control, and you want to start tracking it. For this project, I created a new directory named <strong>Assignment 2</strong>.</p>
 <p>First, I opened <em>RStudio</em> and created a new project in this existing directory. This generated an <code>Assignment 2.Rproj</code> file, fulfilling the requirement to set up an R Project.</p>
 <p>For the remainder of the workflow, I transitioned to the <strong>Positron</strong> IDE. Upon opening the<code>Assignment 2</code> directory in Positron, the only existing file was the <code>.Rproj</code> file. I then created a new Quarto document, saved it as <code>example.qmd</code>, and rendered the file to generate the corresponding HTML output, which name is <code>example.html</code></p>
 </section>
 <section id="initialize-a-local-git-repository-and-push-to-github" class="level2">
-<h2 class="anchored" data-anchor-id="initialize-a-local-git-repository-and-push-to-github">2. Initialize a local Git Repository and push to GitHub</h2>
+<h2 class="anchored" data-anchor-id="initialize-a-local-git-repository-and-push-to-github"><strong>2. Initialize a local Git Repository and push to GitHub</strong></h2>
 <p>Normally, in order to set up one project that is reproducible, we tend to follow these following steps:</p>
 <ul>
 <li>Create a GitHub repo</li>
@@ -236,13 +236,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>Syntax:</strong> <code>git push -u origin main</code></p>
 </blockquote>
 <p>This command pushes your code up the <code>origin</code> connection we just established, specifically onto the <code>main</code> branch.</p>
-<div class="callout callout-style-default callout-tip callout-titled" title="`-u` flag">
+<div class="callout callout-style-default callout-warning callout-titled" title="Why do we need a `-u` flag?">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span><code>-u</code> flag
+<span class="screen-reader-only">Warning</span>Why do we need a <code>-u</code> flag?
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -251,15 +251,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
+<<<<<<< HEAD
 <section id="merge-branch-and-resolve-merge-conflicts" class="level2">
 <h2 class="anchored" data-anchor-id="merge-branch-and-resolve-merge-conflicts">4. <strong>Merge branch and resolve merge conflicts</strong></h2>
 <p>When it comes to merging branches into the main branch, this is one of Git’s most powerful features as it allows users to work on different versions of a project simultaneously. Once we are satisfied with the changes on a branch, we can merge it back into <code>main</code> to incorporate those changes into the primary codebase.</p>
 <div class="callout callout-style-default callout-warning callout-titled" title="Always check which branch you are working on">
+=======
+<section id="modify-on-new-branch" class="level2">
+<h2 class="anchored" data-anchor-id="modify-on-new-branch"><strong>3. Modify on new branch</strong></h2>
+<section id="create-testbranch-and-make-some-changes-in-example.qmd" class="level3">
+<h3 class="anchored" data-anchor-id="create-testbranch-and-make-some-changes-in-example.qmd">Create <code>testbranch</code> and make some changes in <code>example.qmd</code></h3>
+<p>To work on new features safely without affecting your main project, you should create a new branch. A branch is essentially an alternate timeline or an isolated workspace for your code.</p>
+<blockquote class="blockquote">
+<p><strong>Syntax:</strong> <code>git switch -c "newbranch_name"</code></p>
+</blockquote>
+<p>This command actually does two things at once: it creates the new branch, and it immediately switches you into it, or in another word, it moves the repository <code>HEAD</code> to this branch as well.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Check if it works">
+>>>>>>> testbranch
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
+<<<<<<< HEAD
 <span class="screen-reader-only">Warning</span>Always check which branch you are working on
 </div>
 </div>
@@ -290,16 +304,93 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="merge-testbranch-onto-main" class="level3">
 <h3 class="anchored" data-anchor-id="merge-testbranch-onto-main">Merge <code>testbranch</code> onto <code>main</code></h3>
 <div class="callout callout-style-default callout-tip callout-titled" title="Merge branches onto main">
+=======
+<span class="screen-reader-only">Tip</span>Check if it works
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You can confirm this command actually worked by type <code>git branch</code> in the terminal. This command shows a list of branches and point to which branch are you in currently</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git switch <span class="at">-c</span> testbranch</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Switched to a new branch 'testbranch'</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git branch</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#  format</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#  main</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#* testbranch</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<p>There are other ways to create branches and navigate between branches as well. For example, one more command that does exactly what the previous one did is <code>git checkout -b "branch_name"</code>. Additionally, you can do it step-by-step by first, create a new branch, and then swith to that branch to make changes on that newly created branch.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git branch <span class="st">"branch_name"</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git switch <span class="st">"branch_name"</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Switched to branch 'branch_name'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Once you have modified your file inside the <code>testbranch</code>, it is time to permanently record your progress. To ensure your updates are saved both locally on your computer and remotely on GitHub, you must complete the standard <code>stage &gt; commit &gt; push</code> workflow.</p>
+<p>Execute the following commands to complete this process:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git add example.qmd</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git add example.html</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git commit <span class="at">-m</span> <span class="st">"Create new testbranch and add instruction for these steps"</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git push <span class="at">-u</span> origin testbranch</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Enumerating objects: 13, done.</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Counting objects: 100% (13/13), done.</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Delta compression using up to 8 threads</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Compressing objects: 100% (9/9), done.</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Writing objects: 100% (9/9), 5.33 KiB | 1.78 MiB/s, done.</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Total 9 (delta 6), reused 0 (delta 0), pack-reused 0 (from 0)</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co"># remote: Resolving deltas: 100% (6/6), completed with 2 local objects.</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co"># remote: </span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co"># remote: Create a pull request for 'testbranch' on GitHub by visiting:</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co"># remote:      https://github.com/dhoa0015-svg/Assignment2_DucHoang_36558966/pull/new/testbranch</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co"># remote:</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co"># To github.com:dhoa0015-svg/Assignment2_DucHoang_36558966.git</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co">#  * [new branch]      testbranch -&gt; testbranch</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="co"># branch 'testbranch' set up to track 'origin/testbranch'.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="create-new-folder-and-use---amend" class="level3">
+<h3 class="anchored" data-anchor-id="create-new-folder-and-use---amend">Create new folder and use <code>--amend</code></h3>
+<p>To create a new folder inside our project repository, we can either use our computer’s file explorer manually, or we can create it directly using the terminal. The terminal command to make a new directory is <code>mkdir</code> &gt; <strong>Syntax:</strong> <code>mkdir "file_name"</code></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span><span class="kw">`</span><span class="fu">mkdir</span> data<span class="kw">`</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">#     Directory: C:\Users\ducho\OneDrive\MBA S1 Y1\ETC5513 - Collaboration\Assignment 2</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Mode                 LastWriteTime         Length Name</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ----                 -------------         ------ ----</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># d-----         5/10/2026   1:54 AM                data</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Afterward, we simply need to copy or move our data files from Assignment 1 into this newly created data folder.</p>
+<p>Sometimes, right after you finish the workflow and changes were commited, you realize you forgot something important. Instead of creating a messy, separate commit just for the forgotten files, you can use git command contaning <code>--amend</code> to moderately add more details to your previous commit.</p>
+<blockquote class="blockquote">
+<p><strong>Syntax:</strong> <code>git commit --amend --no-edit</code> -&gt; <code>git push --force origin "branch_name"</code></p>
+</blockquote>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First we stage our changes, along with adding new data folder and data file, i have modified qmd and html file as well,</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># so i have also added these to the files that need amended.</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git add example.qmd</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git add example.html</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git add data/</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Amend these previous changes</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git commit <span class="at">--amend</span> <span class="at">--no-edit</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">#  3 files changed, 264 insertions(+), 10 deletions(-)</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co">#  create mode 100644 data/36558966_Duc Hoang.csv</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Force push all these changes to remote repo</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git push <span class="at">--force</span> origin testbranch</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-warning callout-titled" title="Why do we need a `--force` flag?">
+>>>>>>> testbranch
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
+<<<<<<< HEAD
 <span class="screen-reader-only">Tip</span>Merge branches onto main
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>Make sure you are still on main branch when merging alternative branches onto main.</p>
+=======
+<span class="screen-reader-only">Warning</span>Why do we need a <code>--force</code> flag?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Because when we amended a commit that we had already pushed to GitHub, our computer’s timeline no longer matches GitHub’s timeline. A standard git push would be rejected. We must use the <code>--force</code> flag to explicitly tell GitHub to overwrite the old commit history with our newly amended version.</p>
+>>>>>>> testbranch
 </div>
 </div>
 </section>

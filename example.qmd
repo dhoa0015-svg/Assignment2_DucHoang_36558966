@@ -12,7 +12,7 @@ execute:
   show_solution: true
 ---
 
-## 1. Set up the repository locally on my computer
+## **1. Set up the repository locally on my computer**
 
 Suppose you have an existing local directory that is not yet under version control, and you want to start tracking it. For this project, I created a new directory named **Assignment 2**.
 
@@ -20,7 +20,7 @@ First, I opened *RStudio* and created a new project in this existing directory. 
 
 For the remainder of the workflow, I transitioned to the **Positron** IDE. Upon opening the` Assignment 2` directory in Positron, the only existing file was the `.Rproj` file. I then created a new Quarto document, saved it as `example.qmd`, and rendered the file to generate the corresponding HTML output, which name is `example.html`
 
-## 2. Initialize a local Git Repository and push to GitHub
+## **2. Initialize a local Git Repository and push to GitHub**
 
 Normally, in order to set up one project that is reproducible, we tend to follow these following steps:
 
@@ -124,9 +124,101 @@ The final step is to actually upload your committed files from your computer to 
 
 This command pushes your code up the `origin` connection we just established, specifically onto the `main` branch.
 
-::: {.callout-tip title="`-u` flag"}
+::: {.callout-warning title="Why do we need a `-u` flag?"}
 The `-u` flag stands for `upstream`. You only need to type this the very first time you push a new branch. It links your local main branch to the GitHub main branch. For future updates, you can simply type git push and Git will remember where to send it.
 :::
+
+## **3. Modify on new branch**
+
+### Create `testbranch` and make some changes in `example.qmd`
+To work on new features safely without affecting your main project, you should create a new branch. A branch is essentially an alternate timeline or an isolated workspace for your code.
+
+> **Syntax:** `git switch -c "newbranch_name"`
+
+This command actually does two things at once: it creates the new branch, and it immediately switches you into it, or in another word, it moves the repository `HEAD` to this branch as well.
+
+::: {.callout-tip title="Check if it works"}
+You can confirm this command actually worked by type `git branch` in the terminal. This command shows a list of branches and point to which branch are you in currently
+
+```bash
+$ git switch -c testbranch
+# Switched to a new branch 'testbranch'
+$ git branch
+#  format
+#  main
+#* testbranch
+```
+:::
+
+There are other ways to create branches and navigate between branches as well. For example, one more command that does exactly what the previous one did is `git checkout -b "branch_name"`. Additionally, you can do it step-by-step by first, create a new branch, and then swith to that branch to make changes on that newly created branch.
+
+```bash
+$ git branch "branch_name"
+$ git switch "branch_name"
+# Switched to branch 'branch_name'
+```
+Once you have modified your file inside the `testbranch`, it is time to permanently record your progress. To ensure your updates are saved both locally on your computer and remotely on GitHub, you must complete the standard `stage > commit > push` workflow.
+
+Execute the following commands to complete this process:
+```bash
+$ git add example.qmd
+$ git add example.html
+
+$ git commit -m "Create new testbranch and add instruction for these steps"
+
+$ git push -u origin testbranch
+# Enumerating objects: 13, done.
+# Counting objects: 100% (13/13), done.
+# Delta compression using up to 8 threads
+# Compressing objects: 100% (9/9), done.
+# Writing objects: 100% (9/9), 5.33 KiB | 1.78 MiB/s, done.
+# Total 9 (delta 6), reused 0 (delta 0), pack-reused 0 (from 0)
+# remote: Resolving deltas: 100% (6/6), completed with 2 local objects.
+# remote: 
+# remote: Create a pull request for 'testbranch' on GitHub by visiting:
+# remote:      https://github.com/dhoa0015-svg/Assignment2_DucHoang_36558966/pull/new/testbranch
+# remote:
+# To github.com:dhoa0015-svg/Assignment2_DucHoang_36558966.git
+#  * [new branch]      testbranch -> testbranch
+# branch 'testbranch' set up to track 'origin/testbranch'.
+```
+
+### Create new folder and use `--amend`
+
+To create a new folder inside our project repository, we can either use our computer's file explorer manually, or we can create it directly using the terminal. The terminal command to make a new directory is `mkdir`
+> **Syntax:** `mkdir "file_name"`
+
+```bash
+$`mkdir data`
+#     Directory: C:\Users\ducho\OneDrive\MBA S1 Y1\ETC5513 - Collaboration\Assignment 2
+# Mode                 LastWriteTime         Length Name
+# ----                 -------------         ------ ----
+# d-----         5/10/2026   1:54 AM                data
+```
+Afterward, we simply need to copy or move our data files from Assignment 1 into this newly created data folder.
+
+Sometimes, right after you finish the workflow and changes were commited, you realize you forgot something important. Instead of creating a messy, separate commit just for the forgotten files, you can use git command contaning `--amend` to moderately add more details to your previous commit.
+
+> **Syntax:** `git commit --amend --no-edit` -> `git push --force origin "branch_name"`
+
+```bash
+# First we stage our changes, along with adding new data folder and data file, i have modified qmd and html file as well,
+# so i have also added these to the files that need amended.
+$ git add example.qmd
+$ git add example.html
+$ git add data/
+
+# Amend these previous changes
+$ git commit --amend --no-edit
+#  3 files changed, 264 insertions(+), 10 deletions(-)
+#  create mode 100644 data/36558966_Duc Hoang.csv
+
+# Force push all these changes to remote repo
+$ git push --force origin testbranch
+```
+
+::: {.callout-warning title="Why do we need a `--force` flag?"}
+Because when we amended a commit that we had already pushed to GitHub, our computer's timeline no longer matches GitHub's timeline. A standard git push would be rejected. We must use the `--force` flag to explicitly tell GitHub to overwrite the old commit history with our newly amended version. 
 
 ## 4. **Merge branch and resolve merge conflicts**
 
@@ -176,3 +268,4 @@ Because both branches edited the same lines, Git cannot auto-merge them. It will
 
 ```bash
 $ git merge testbranch
+```
