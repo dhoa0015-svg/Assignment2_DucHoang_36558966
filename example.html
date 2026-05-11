@@ -251,12 +251,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<<<<<<< HEAD
-<section id="merge-branch-and-resolve-merge-conflicts" class="level2">
-<h2 class="anchored" data-anchor-id="merge-branch-and-resolve-merge-conflicts">4. <strong>Merge branch and resolve merge conflicts</strong></h2>
-<p>When it comes to merging branches into the main branch, this is one of Git’s most powerful features as it allows users to work on different versions of a project simultaneously. Once we are satisfied with the changes on a branch, we can merge it back into <code>main</code> to incorporate those changes into the primary codebase.</p>
-<div class="callout callout-style-default callout-warning callout-titled" title="Always check which branch you are working on">
-=======
 <section id="modify-on-new-branch" class="level2">
 <h2 class="anchored" data-anchor-id="modify-on-new-branch"><strong>3. Modify on new branch</strong></h2>
 <section id="create-testbranch-and-make-some-changes-in-example.qmd" class="level3">
@@ -267,44 +261,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </blockquote>
 <p>This command actually does two things at once: it creates the new branch, and it immediately switches you into it, or in another word, it moves the repository <code>HEAD</code> to this branch as well.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Check if it works">
->>>>>>> testbranch
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<<<<<<< HEAD
-<span class="screen-reader-only">Warning</span>Always check which branch you are working on
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Because Git allows you to switch between branches, it is important to always be aware of which branch you are currently on before making any changes. Working on the wrong branch by mistake can lead to messy, unintended modifications that are difficult to untangle.</p>
-<p>If you are using Positron, you can always check your current branch in the <strong>bottom-left corner</strong> of the editor window.</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="image/branch.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<figcaption>Positron branch navigator</figcaption>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</div>
-<p>First, switch back to the <code>main</code> branch. This is necessary so that our next changes are recorded on <code>main</code> and not on <code>testbranch</code>.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git checkout main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Open <code>example.qmd</code> and edit the same lines that were changed on testbranch, but write something different. The key is that both branches have touched the same part of the file, what will trigger a conflict.</p>
-<p>After saving, stage and commit the change:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git add example.qmd</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git commit <span class="at">-m</span> <span class="st">"Update title on main branch"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Then push to the remote so the <code>main</code> branch on GitHub also reflects this change:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>At this point, both <code>main</code> and <code>testbranch</code> have diverged, where they share a common ancestor commit but each has a different version of example.qmd. Git knows about this but has not yet tried to reconcile the two.</p>
-<section id="merge-testbranch-onto-main" class="level3">
-<h3 class="anchored" data-anchor-id="merge-testbranch-onto-main">Merge <code>testbranch</code> onto <code>main</code></h3>
-<div class="callout callout-style-default callout-tip callout-titled" title="Merge branches onto main">
-=======
 <span class="screen-reader-only">Tip</span>Check if it works
 </div>
 </div>
@@ -372,27 +333,116 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Force push all these changes to remote repo</span></span>
 <span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git push <span class="at">--force</span> origin testbranch</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="callout callout-style-default callout-warning callout-titled" title="Why do we need a `--force` flag?">
->>>>>>> testbranch
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<<<<<<< HEAD
-<span class="screen-reader-only">Tip</span>Merge branches onto main
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Make sure you are still on main branch when merging alternative branches onto main.</p>
-=======
 <span class="screen-reader-only">Warning</span>Why do we need a <code>--force</code> flag?
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>Because when we amended a commit that we had already pushed to GitHub, our computer’s timeline no longer matches GitHub’s timeline. A standard git push would be rejected. We must use the <code>--force</code> flag to explicitly tell GitHub to overwrite the old commit history with our newly amended version.</p>
->>>>>>> testbranch
 </div>
 </div>
+</section>
+</section>
+<section id="merge-branch-and-resolve-merge-conflicts" class="level2">
+<h2 class="anchored" data-anchor-id="merge-branch-and-resolve-merge-conflicts">4. <strong>Merge branch and resolve merge conflicts</strong></h2>
+<section id="modify-file-in-main-branch" class="level3">
+<h3 class="anchored" data-anchor-id="modify-file-in-main-branch">Modify file in main branch</h3>
+<p>When it comes to merging branches into the main branch, this is one of Git’s most powerful features as it allows users to work on different versions of a project simultaneously. Once we are satisfied with the changes on a branch, we can merge it back into <code>main</code> to incorporate those changes into the primary codebase.</p>
+<div class="callout callout-style-default callout-warning callout-titled" title="Always check which branch you are working on">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Always check which branch you are working on
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Because Git allows you to switch between branches, it is important to always be aware of which branch you are currently on before making any changes. Working on the wrong branch by mistake can lead to messy, unintended modifications that are difficult to untangle.</p>
+<p>If you are using Positron, you can always check your current branch in the <strong>bottom-left corner</strong> of the editor window.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="image/branch.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>Positron branch navigator</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>First, switch back to the <code>main</code> branch. This is necessary so that our next changes are recorded on <code>main</code> and not on <code>testbranch</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git checkout main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Open <code>example.qmd</code> and edit the same lines that were changed on testbranch, but write something different. The key is that both branches have touched the same part of the file, what will trigger a conflict.</p>
+<p>After saving, stage and commit the change:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git add example.qmd</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git commit <span class="at">-m</span> <span class="st">"Update title on main branch"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Then push to the remote so the <code>main</code> branch on GitHub also reflects this change:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>At this point, both <code>main</code> and <code>testbranch</code> have diverged, where they share a common ancestor commit but each has a different version of example.qmd. Git knows about this but has not yet tried to reconcile the two.</p>
+</section>
+<section id="merge-testbranch-onto-main" class="level3">
+<h3 class="anchored" data-anchor-id="merge-testbranch-onto-main">Merge <code>testbranch</code> onto <code>main</code></h3>
+<div class="callout callout-style-default callout-tip callout-titled" title="Merge branches onto main">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Merge branches onto main
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Make sure you are still on main branch when merging alternative branches onto main.</p>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Syntax:</strong> <code>git merge &lt;branchname&gt;</code></p>
+</blockquote>
+<p>Because both branches edited the same lines, Git cannot auto-merge them. It will print a message confronting about there was a conflict trying to merge these two:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git merge testbranch</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Output:</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Auto-merging</span> example.html</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="ex">CONFLICT</span> <span class="er">(</span><span class="ex">content</span><span class="kw">)</span><span class="bu">:</span> Merge conflict in example.html</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="ex">Auto-merging</span> example.qmd</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="ex">CONFLICT</span> <span class="er">(</span><span class="ex">content</span><span class="kw">)</span><span class="bu">:</span> Merge conflict in example.qmd</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="ex">Automatic</span> merge failed<span class="kw">;</span> <span class="ex">fix</span> conflicts and then commit the result.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="what-the-conflict-markers-look-like" class="level4">
+<h4 class="anchored" data-anchor-id="what-the-conflict-markers-look-like">What the conflict markers look like</h4>
+<p>when the conflict ahppen, <code>example.qmd</code> file will display in any text editor. Git has annotated the conflicting section with special markers:</p>
+<pre><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+Modification on main branch: Section 4. Merge branch and resolve merge conflict
+=======
+Modification on testbranch: Section 3: Modify on new branch
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; testbranch</code></pre>
+<ul>
+<li>Everything between <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</code> and <code>=======</code> is what exists on <code>main</code> (your current branch).</li>
+<li>Everything between <code>=======</code> and <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt; testbranch</code> is what exists on <code>testbranch</code>.</li>
+</ul>
+</section>
+<section id="resolving-the-conflict" class="level4">
+<h4 class="anchored" data-anchor-id="resolving-the-conflict">Resolving the conflict</h4>
+<p>Edit the file to keep the version you want, this act can enable you too: accept changes with just click, or manual change evrythign if you want. (or write a new combined version), and <strong>delete all three marker lines</strong>. after you are happy with your changes, Save the file. Now tell Git the conflict has been resolved by staging the file:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add example.qmd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Running <code>git status</code> again confirms there are no more unmerged paths:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="verifying-on-github" class="level4">
+<h4 class="anchored" data-anchor-id="verifying-on-github">Verifying on GitHub</h4>
+<p>Navigate to your repository on GitHub. You will see:</p>
+<ul>
+<li>The commit history on <code>main</code> now includes commits from both branches, plus the new merge commit at the top.</li>
+<li>The network graph shows the two branches diverging and then converging back into <code>main</code>.</li>
+<li>The file <code>example.qmd</code> on GitHub reflects the resolved version you chose.</li>
+</ul>
+<p>This confirms that the conflict was identified, resolved locally, and the clean merged result has been successfully published to the remote repository.</p>
+<p>Merge conflicts are a normal part of collaborative version control. Understanding how to read conflict markers, choose the correct resolution, and complete the merge cleanly is an essential Git skill. The workflow here — <code>merge → identify conflict → edit file → add → commit → push</code> is the same regardless of how large or complex the conflict is.</p>
+</section>
 </section>
 </section>
 

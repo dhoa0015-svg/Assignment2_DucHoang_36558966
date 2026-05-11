@@ -219,8 +219,10 @@ $ git push --force origin testbranch
 
 ::: {.callout-warning title="Why do we need a `--force` flag?"}
 Because when we amended a commit that we had already pushed to GitHub, our computer's timeline no longer matches GitHub's timeline. A standard git push would be rejected. We must use the `--force` flag to explicitly tell GitHub to overwrite the old commit history with our newly amended version. 
+:::
 
 ## 4. **Merge branch and resolve merge conflicts**
+### Modify file in main branch
 
 When it comes to merging branches into the main branch, this is one of Git's most powerful features as it allows users to work on different versions of a project simultaneously. Once we are satisfied with the changes on a branch, we can merge it back into `main` to incorporate those changes into the primary codebase.
 
@@ -264,8 +266,55 @@ Make sure you are still on main branch when merging alternative branches onto ma
 
 > **Syntax:** `git merge <branchname>`
 
-Because both branches edited the same lines, Git cannot auto-merge them. It will print a message confronting about there was a conflict trying to merge these two:\
+Because both branches edited the same lines, Git cannot auto-merge them. It will print a message confronting about there was a conflict trying to merge these two:
 
 ```bash
 $ git merge testbranch
+# Output:
+Auto-merging example.html
+CONFLICT (content): Merge conflict in example.html
+Auto-merging example.qmd
+CONFLICT (content): Merge conflict in example.qmd
+Automatic merge failed; fix conflicts and then commit the result.
 ```
+
+#### What the conflict markers look like
+
+when the conflict ahppen, `example.qmd` file will display in any text editor. Git has annotated the conflicting section with special markers:
+
+```
+<<<<<<< HEAD
+Modification on main branch: Section 4. Merge branch and resolve merge conflict
+=======
+Modification on testbranch: Section 3: Modify on new branch
+>>>>>>> testbranch
+```
+
+- Everything between `<<<<<<< HEAD` and `=======` is what exists on `main` (your current branch).
+- Everything between `=======` and `>>>>>>> testbranch` is what exists on `testbranch`.
+
+#### Resolving the conflict
+
+Edit the file to keep the version you want, this act can enable you too: accept changes with just click, or manual change evrythign if you want. (or write a new combined version), and **delete all three marker lines**. after you are happy with your changes, Save the file. Now tell Git the conflict has been resolved by staging the file:
+
+```bash
+git add example.qmd
+```
+
+Running `git status` again confirms there are no more unmerged paths:
+
+```bash
+git status
+```
+
+#### Verifying on GitHub
+
+Navigate to your repository on GitHub. You will see:
+
+- The commit history on `main` now includes commits from both branches, plus the new merge commit at the top.
+- The network graph shows the two branches diverging and then converging back into `main`.
+- The file `example.qmd` on GitHub reflects the resolved version you chose.
+
+This confirms that the conflict was identified, resolved locally, and the clean merged result has been successfully published to the remote repository.
+
+Merge conflicts are a normal part of collaborative version control. Understanding how to read conflict markers, choose the correct resolution, and complete the merge cleanly is an essential Git skill. The workflow here — `merge → identify conflict → edit file → add → commit → push` is the same regardless of how large or complex the conflict is.
